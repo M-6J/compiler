@@ -1,6 +1,5 @@
-FROM gcc:9
+FROM openjdk:8
 WORKDIR /app/
-COPY . /app/
-COPY main.c ./
-RUN gcc main.c -o main
-RUN chmod +x main
+COPY ./* ./
+ENV CLASSPATH="./antlr-4.9.2-complete.jar:$CLASSPATH"
+RUN javac Main.java

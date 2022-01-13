@@ -1,7 +1,6 @@
-[jobs.lexer]
-
-image = { source = "dockerfile", path = ".", tag = "pascal-lex-example" }
-
+[jobs.lab1]
+image = { source = "dockerfile", path = "."}
 run = [
-  "./main $input",
+  "export CLASSPATH='./antlr-4.9.2-complete.jar:$CLASSPATH'",
+  "java Main $input $ir",
 ]
