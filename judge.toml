@@ -1,6 +1,7 @@
-[jobs.lab1]
-image = { source = "dockerfile", path = "."}
+[jobs.lab2]
+
+image = { source = "dockerfile", path = "." }
+
 run = [
-  "export CLASSPATH='./antlr-4.9.2-complete.jar:$CLASSPATH'",
-  "java Main $input $ir",
+  "java -cp .:antlr-4.9.2-complete.jar Main $input $ir",
 ]
