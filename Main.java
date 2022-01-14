@@ -5,6 +5,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
@@ -12,7 +15,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ANTLRErrorListener e = new ErrorListener();
         FileInputStream fileInputStream = new FileInputStream(args[0]);
-        //FileInputStream fileInputStream = new FileInputStream("C:\\Users\\jmk07\\Desktop\\lab2\\src\\test.txt");
         output = args[1];
 
         byte[] arr = new byte[100];
@@ -24,27 +26,26 @@ public class Main {
             }
         } catch (Exception e1){
             e1.printStackTrace();
-            System.exit(0);
         }
 
+        //console -> out : change output stream route
         File file = new File(output);
         PrintStream stream = null;
         try {
             stream = new PrintStream(file);
         } catch (Exception e1) {
             e1.printStackTrace();
-            System.exit(0);
         }
         System.setOut(stream);
 
 
 
         CharStream inputStream = CharStreams.fromString(String.valueOf(inString));
-        lab2Lexer lexer = new lab2Lexer(inputStream);
+        lab1Lexer lexer = new lab1Lexer(inputStream);
         lexer.removeErrorListeners();
         lexer.addErrorListener(e);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-        lab2Parser parser = new lab2Parser(tokenStream);
+        lab1Parser parser = new lab1Parser(tokenStream);
         parser.removeErrorListeners();
         parser.addErrorListener(e);
         ParseTree tree = parser.compUnit();
@@ -53,6 +54,5 @@ public class Main {
 
         fileInputStream.close();
     }
-
 }
 
